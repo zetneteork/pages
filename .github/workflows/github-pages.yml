@@ -1,0 +1,27 @@
+name: Build and Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby and Jekyll
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.x' # Or your preferred Ruby version
+          bundler-cache: true
+
+      - name: Build with Jekyll
+        run: bundle exec jekyll build --destination _site
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: _site
+          commit_message: Deploy site
