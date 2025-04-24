@@ -17,6 +17,9 @@ jobs:
           ruby-version: '3.1.0'
           bundler-cache: false
 
+      - name: Install Jekyll Dependencies
+        run: bundle install
+
       - name: Build with Jekyll
         run: bundle exec jekyll build --destination _site
 
